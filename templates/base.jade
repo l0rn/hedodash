@@ -7,11 +7,18 @@ html
     script(src="/libs/bootstrap/js/bootstrap.min.js")
   body
     .wrapper
-      nav
-        .container
-          ul.nav.nav-pills
-            li
-              a(href="index") Example
+      block header
+        .head-index
+          nav
+            .container
+              .copllapse
+                ul.nav.nav-pills
+                  li
+                    a(href="http://mfg.hedo/") Ride sharing
+                  li
+                    a(href="chat") Congress chat
+                  li
+                    a(href="schedule") Schedule
       main
         .container
           block content

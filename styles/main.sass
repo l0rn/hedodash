@@ -1,8 +1,46 @@
+@font-face
+  font-family: 'Open Sans Condensed'
+  font-style: normal
+  font-weight: 300
+  src: local('Open Sans Cond Light'), local('OpenSans-CondensedLight'), url(../fonts/opensans.woff2) format('woff2')
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000
+
+html, body
+  margin: 0
+  padding: 0
+  height: 100%
+  font-family: 'Open Sans Condensed', sans-serif
+
+.super-heading
+  color: white
+  font-size: 6em
+  text-shadow: 0 5px 5px #000
+
 .wrapper
   width: 100%
+  height: 100%
 
 nav
-  margin: 1% auto
   .nav
     margin: auto
     li
+      display: inline
+      border: 2px solid white
+      margin-right: 15px
+      a
+        border-radius: 0
+        color: white
+        text-transform: uppercase
+        font-weight: bold
+
+.head-index
+  padding: 3%
+  opacity: 0.9
+  background-image: url(../res/img/slider6.jpg)
+  background-repeat: no-repeat
+  background-position: center
+  background-size: 100% auto
+
+.full-height
+  padding: 0
+  height: 100%
