@@ -17,11 +17,16 @@ html, body
 main
   background: white
 
+.no-padding
+  padding: 0
+
 .super-heading
   color: white
-  font-size: 5.5em
   text-shadow: 0 5px 5px #000
   margin: 0
+
+.white-content
+  color: white
 
 .wrapper
   width: 100%
@@ -46,7 +51,10 @@ nav
   background-image: url(../res/img/slider6.jpg)
   background-repeat: no-repeat
   background-position: top
-  background-size: 100% auto
+  background-size: auto
+  @media screen and (min-width: 1280px)
+    background-size: 100% auto
+
 
 .full-height
   padding: 0
