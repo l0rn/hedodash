@@ -62,7 +62,7 @@ angular.module('hedodash', [])
                             var slot_id = '#slot-' + ev.start.split(':')[0] + '-' + ev.start.split(':')[1];
                             ev.top = $(slot_id).position().top;
                             ev.height = ev.duration.split(':')[0] * 4 * 75 + (ev.duration.split(':')[1] / 15) * 75;
-                            ev.left = 30;
+                            ev.left = 50;
                         });
 
                         // collisions
