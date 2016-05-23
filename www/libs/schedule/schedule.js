@@ -9,7 +9,7 @@ angular.module('hedodash', [])
     .controller('ScheduleController', function($scope, $http) {
         $http({
           method: 'GET',
-          url: 'http://store.hedo/schedule.json'
+          url: '/res/schedule.json'
         }).then(function (response) {
             $scope.schedule = response.data.schedule.conference;
             $scope.selectDay = function (day) {
