@@ -1,18 +1,19 @@
 doctype
-html
+html(ng-app="hedodash")
   head
+    meta(name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no")
     link(rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css")
     link(rel="stylesheet" href="/styles/main.css")
     script(src="/libs/jquery/jquery-2.2.4.min.js")
+    script(src="/libs/angular/angular.min.js")
+    script(src="/libs/lodash/lodash.min.js")
     script(src="/libs/bootstrap/js/bootstrap.min.js")
+    script(src="/libs/schedule/schedule.js")
   body
     .wrapper
       block header
         .head-index
-          nav
-            .container
-              .copllapse
-              include navigation
+          .container
+            include navigation
       main
-        .container
-          block content
+        block content

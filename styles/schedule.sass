@@ -1,0 +1,47 @@
+.slot
+  height: 75px
+  border: 1px dotted darkgrey
+
+.timescale
+  position: absolute
+  .slot
+    width: 30px
+  float: left
+  z-index: 999
+  background: #fff
+
+.schedule-content
+  float: left
+  width: 100%
+
+.event
+  position: absolute
+  width: 200px
+  top: 0
+  left: 0
+  border: 1px solid black
+  background-color: darkseagreen
+  box-sizing: border-box
+  &.Party
+    background-color: deeppink
+  &.Protest
+    background-color: greenyellow
+  &.Action
+    background-color: orangered
+
+
+.day-menu-wrapper
+  padding: 1%
+
+  .day-menu
+    text-align: center
+  .day-button
+    display: inline
+    margin-right: 5px
+  .day-button:last-of-type
+    margin: 0
+.schedule-day
+  position: relative
+
+.loading
+  visibility: hidden

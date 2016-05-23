@@ -1,0 +1,19 @@
+.schedule-day
+  .timescale
+    div(ng-repeat="hour in hours")
+      div(class="slot", id="slot-{{hour}}-00")
+        .time-display {{ hour }} h
+      div(class="slot", id="slot-{{hour}}-15")
+      div(class="slot", id="slot-{{hour}}-30")
+      div(class="slot", id="slot-{{hour}}-45")
+  .schedule-content
+    div(ng-repeat="hour in hours")
+      div(class="slot", id="slot-{{hour}}-00")
+      div(class="slot", id="slot-{{hour}}-15")
+      div(class="slot", id="slot-{{hour}}-30")
+      div(class="slot", id="slot-{{hour}}-45")
+    .events.loading
+      .event(ng-repeat="event in events", style="top: {{ event.top }}px; left: {{ event.left }}px; height: {{ event.height }}px;", class="{{ event.track }}" id="ev-{{ event.id }}")
+        h4.title {{ event.title }}
+        p.subtitle {{ event.subtitle }}
+        p.room-time {{ event.room }} - {{ event.start }}
