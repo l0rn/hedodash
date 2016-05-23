@@ -34,7 +34,7 @@ angular.module('hedodash', [])
     })
     .directive('scheduleDay', function() {
         return {
-            templateUrl: '/templates/schedule_day',
+            templateUrl: '/schedule_day',
             scope: {
                 'day': '='
             },
