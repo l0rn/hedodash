@@ -82,7 +82,6 @@ angular.module('hedodash', [])
                             $timeout(function() {
                                 $('.schedule-content').css({width: $(document).width()});
                                 $('.events').removeClass('loading');
-
                             });
 
                     });

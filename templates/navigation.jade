@@ -1,6 +1,15 @@
-nav
-  ul.nav.nav-pills
-    li
-      a(href="schedule.html") Schedule
-    li
-      a(href="https://mfg.hedonist-international.org/") Ride sharing
+nav.navbar.navbar-default
+  .container-fluid
+    // Brand and toggle get grouped for better mobile display
+    .navbar-header
+      button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse', aria-expanded='false')
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+    #bs-example-navbar-collapse.collapse.navbar-collapse
+      ul.nav.navbar-nav
+        li
+          a(href='/schedule.html') Schedule
+        li
+          a(href='http://mfg.hedonist-international.org') Ride sharing
