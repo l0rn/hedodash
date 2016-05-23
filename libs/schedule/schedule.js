@@ -43,23 +43,47 @@ angular.module('hedodash', [])
                     if (!newVal) {
                         return
                     }
-                    $scope.hours = [
-                        '10', '11', '12', '13', '14', '15', '16', '17', '18', '19',
-                        '20', '21', '22', '23', '00', '01', '02', '03', '04', '05',
-                        '06', '07', '08', '09'
-                    ];
+                    var minHour = null;
+                    var maxHour = 6;
                     $scope.events = [];
+                    $scope.hours = [];
                     _.each($scope.day.rooms, function (room) {
                         _.each(room, function (ev) {
+                            if ((minHour == null || minHour > parseInt(ev.start.split(':')[0])) && parseInt(ev.start.split(':')[0]) > 6) {
+                                minHour = parseInt(ev.start.split(':')[0]);
+                            }
                             $scope.events.push(ev);
                         })
                     });
+                    if (minHour == null) {
+                        minHour = 10;
+                    }
+                    var hour = minHour;
+                    while(true) {
+                        var pref;
+                        if (hour < 10) {
+                            pref = '0';
+                        } else {
+                            pref = '';
+                        }
+                        $scope.hours.push(pref + hour);
+                        if (hour == 23) {
+                            hour = 0;
+                        } else {
+                            hour++;
+                        }
+                        if (hour == minHour || hour == maxHour) {
+                            break;
+                        }
+                    }
+                    console.log($scope.hours);
                     $('.events').addClass('loading');
                     // dom sensitive
                     $timeout(function() {
                         //positions
                         _.each($scope.events, function (ev) {
                             var slot_id = '#slot-' + ev.start.split(':')[0] + '-' + ev.start.split(':')[1];
+                            ev.link = globalConfig.scheduleUrl + 'events/' + ev.id;
                             ev.top = $(slot_id).position().top;
                             ev.height = ev.duration.split(':')[0] * 4 * 75 + (ev.duration.split(':')[1] / 15) * 75;
                             ev.left = 50;

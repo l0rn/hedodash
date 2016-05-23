@@ -17,6 +17,7 @@
       div(class="slot")
     .events.loading
       .event(ng-repeat="event in events", style="top: {{ event.top }}px; left: {{ event.left }}px; height: {{ event.height }}px;", class="{{ event.track }}" id="ev-{{ event.id }}")
-        h4.title {{ event.title }}
+        a.title(href="{{ event.link }}")
+          h4 {{ event.title }}
         p.subtitle {{ event.subtitle }}
         p.room-time {{ event.room }} - {{ event.start }}
