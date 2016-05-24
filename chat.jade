@@ -1,5 +1,18 @@
 extends ./templates/base
 
 block content
-  h1 Talk to each other!
-  p Try this!
+  .container
+    .chat(ng-controller="ChatController")
+      h1 Talk to each other!
+      .form-inline
+        label Your username is
+        | &nbsp;
+        input(ng-model="username")
+      .message-box
+        span.messagespan(ng-repeat="message in messages track by $index") {{ message }}
+      form
+        .row
+          .col-md-8
+            input.form-control.message-input(ng-model="messageText", )
+          .col-md-4
+            button.btn.btn-success.btn-block(ng-click="sendMessage(messageText)" type="submit") Send
