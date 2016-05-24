@@ -85,7 +85,7 @@ angular.module('hedodash', [])
                             var slot_id = '#slot-' + ev.start.split(':')[0] + '-' + ev.start.split(':')[1];
                             ev.link = globalConfig.scheduleUrl + 'events/' + ev.id;
                             ev.top = $(slot_id).position().top;
-                            ev.height = ev.duration.split(':')[0] * 4 * 75 + (ev.duration.split(':')[1] / 15) * 75;
+                            ev.height = ev.duration.split(':')[0] * 4 * 50 + (ev.duration.split(':')[1] / 15) * 50;
                             ev.left = 50;
                         });
 
