@@ -14,4 +14,4 @@ block content
         .col-md-8
           input.form-control.message-input(ng-model="messageText", )
         .col-md-4
-          button.btn.btn-success.btn-block(ng-click="sendMessage(messageText)" type="submit") Send
+          button#send-button.btn.btn-success.btn-block(ng-click="sendMessage(messageText)" type="submit") Send

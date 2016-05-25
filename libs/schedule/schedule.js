@@ -9,7 +9,12 @@ $(window).scroll(function(){
     });
 });
 
-angular.module('hedodash', [])
+angular.module('hedodash', ['LocalStorageModule'])
+    .config(function (localStorageServiceProvider) {
+      localStorageServiceProvider
+        .setPrefix('hedo')
+        .setStorageType('sessionStorage')
+    })
     .controller('ScheduleController', function($scope, $http) {
         $http({
           method: 'GET',
@@ -129,7 +134,7 @@ angular.module('hedodash', [])
             }
         };
     })
-    .controller('ChatController', function ($scope) {
+    .controller('ChatController', function ($scope, $timeout, localStorageService) {
         $scope.messages = [];
         sock.onopen = function () {
             $scope.sendMessage = function (msg) {
@@ -148,13 +153,26 @@ angular.module('hedodash', [])
                             }
                         });
                     } else if (e.data.split(":")[1] == 'user') {
-                        $scope.username = e.data.split(":")[2];
+                        if (localStorageService.get('chatname') != null)
+                            $scope.username = localStorageService.get('chatname');
+                        else {
+                            $scope.username = e.data.split(":")[2];
+                            localStorageService.set('chatname', $scope.username);
+                        }
                     }
                 } else {
                     $scope.messages.push(e.data);
                 }
+                $timeout(function() {
+                    $('.message-box').scrollTop($('.message-box')[0].scrollHeight);
+                });
+
                 $scope.$apply();
             };
+            $('.message-input').keypress(function(e){
+                if(e.which==13)
+                    $('#send-button').click();
+            });
             sock.send('init:' + token);
         };
     });
