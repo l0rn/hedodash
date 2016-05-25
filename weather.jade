@@ -5,23 +5,25 @@ block content
       h1 Weather Forecast
       .weather(ng-controller="WeatherController")
         p Rainy hours are marked with a blue box
-        .weather-box.col-md-3.col-sm-4.col-xs-12(ng-repeat="day in weather.forecast")
-          .title.col-md-12.col-md-12.col-xs-12
-            img.icon(ng-src="/res/img/weather/{{day.icon}}")
-            .content
-              .date {{day.date.toDateString()}}
-              .text {{day.day.info}}
-              .celcius {{day.day.mintemp_c}}°C - {{day.day.maxtemp_c}}°C
-              .fahrenheit {{day.day.mintemp_f}}°F - {{day.day.maxtemp_f}}°F
+        .row
+          .weather-box.col-md-3.col-sm-6.col-xs-12(ng-repeat="day in weather.forecast")
+            .border
+              .title.col-md-12.col-md-12.col-xs-12
+                  img.icon(ng-src="/res/img/weather/{{day.icon}}")
+                  .content
+                    .date {{day.date.toDateString()}}
+                    .text {{day.day.info}}
+                    .celcius {{day.day.mintemp_c}}°C - {{day.day.maxtemp_c}}°C
+                    .fahrenheit {{day.day.mintemp_f}}°F - {{day.day.maxtemp_f}}°F
 
-          span Rain/Sun
-          .rain-box
-            .rainbool(ng-repeat="hour in day.hour track by $index", class="rainbool-{{ hour.will_it_rain }}")
-          .sun-box
-            .night(style="flex:{{ day.sunbox.sunrise }};")
-            .sunchange {{ day.sunrise }}
-            .day(style="flex:{{ day.sunbox.sunset }};")
-            .sunchange {{day.sunset}}
-            .night(style="flex:{{ day.sunbox.night }};")
-          .scale-box
-            .hour(ng-repeat="hour in hour_scale") {{ hour }}
+              span Rain/Sun
+              .rain-box
+                .rainbool(ng-repeat="hour in day.hour track by $index", class="rainbool-{{ hour.will_it_rain }}")
+              .sun-box
+                .night(style="flex:{{ day.sunbox.sunrise }};")
+                .sunchange {{ day.sunrise }}
+                .day(style="flex:{{ day.sunbox.sunset }};")
+                .sunchange {{day.sunset}}
+                .night(style="flex:{{ day.sunbox.night }};")
+              .scale-box
+                .hour(ng-repeat="hour in hour_scale") {{ hour }}
