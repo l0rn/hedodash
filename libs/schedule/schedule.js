@@ -137,6 +137,9 @@ angular.module('hedodash', ['LocalStorageModule'])
     .controller('ChatController', function ($scope, $timeout, localStorageService) {
         $scope.messages = [];
         sock.onopen = function () {
+            $scope.$watch('username', function(newVal) {
+                localStorageService.set('chatname', $scope.username);
+            });
             $scope.sendMessage = function (msg) {
                 if (msg && msg != '') {
                     sock.send($scope.username + ":" + msg);
@@ -157,7 +160,6 @@ angular.module('hedodash', ['LocalStorageModule'])
                             $scope.username = localStorageService.get('chatname');
                         else {
                             $scope.username = e.data.split(":")[2];
-                            localStorageService.set('chatname', $scope.username);
                         }
                     }
                 } else {
