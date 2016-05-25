@@ -1,3 +1,7 @@
+var sock = new SockJS('http://congress.hedo:9999/chat');
+var token = Math.random().toString(36).substr(2);
+
+
 $(window).scroll(function(){
     $('.timescale').css({
         'left': $(this).scrollLeft()
@@ -123,6 +127,35 @@ angular.module('hedodash', [])
                 });
 
             }
+        };
+    })
+    .controller('ChatController', function ($scope) {
+        $scope.messages = [];
+        sock.onopen = function () {
+            $scope.sendMessage = function (msg) {
+                if (msg && msg != '') {
+                    sock.send($scope.username + ":" + msg);
+                    $scope.messageText = '';
+                }
+            };
+
+            sock.onmessage = function (e) {
+                if (e.data.startsWith(token)) {
+                    if (e.data.split(":")[1] == 'history') {
+                        _.each(e.data.split(":").slice(2).join(":").split(","), function (msg) {
+                            if (msg != ''){
+                                $scope.messages.push(msg);
+                            }
+                        });
+                    } else if (e.data.split(":")[1] == 'user') {
+                        $scope.username = e.data.split(":")[2];
+                    }
+                } else {
+                    $scope.messages.push(e.data);
+                }
+                $scope.$apply();
+            };
+            sock.send('init:' + token);
         };
     });
 
