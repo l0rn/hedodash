@@ -20,4 +20,8 @@
         a.title(href="{{ event.link }}")
           h4 {{ event.title }}
         p.room-time {{ event.room }} - {{ event.start }}
+        p.speakers
+          span Speakers:
+          | &nbsp;
+          span(ng-repeat="person in event.persons") {{ person.public_name }},
         p.subtitle {{ event.subtitle }}
