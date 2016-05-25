@@ -156,7 +156,7 @@ angular.module('hedodash', ['LocalStorageModule'])
                             }
                         });
                     } else if (e.data.split(":")[1] == 'user') {
-                        if (localStorageService.get('chatname') != null)
+                        if (localStorageService.get('chatname') != null && localStorageService.get('chatname') != '')
                             $scope.username = localStorageService.get('chatname');
                         else {
                             $scope.username = e.data.split(":")[2];
