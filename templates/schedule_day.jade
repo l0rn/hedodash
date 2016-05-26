@@ -16,8 +16,8 @@
       div(class="slot")
       div(class="slot")
     .events.loading
-      .event(ng-repeat="event in events", style="top: {{ event.top }}px; left: {{ event.left }}px; height: {{ event.height }}px;", class="{{ event.track }}" id="ev-{{ event.id }}")
-        a.title(href="{{ event.link }}")
+      .event(ng-click="detailModal(event)", ng-repeat="event in events", style="top: {{ event.top }}px; left: {{ event.left }}px; height: {{ event.height }}px;", class="{{ event.track }}" id="ev-{{ event.id }}")
+        a.title
           h4 {{ event.title }}
         p.room-time {{ event.room }} - {{ event.start }}
         p.speakers

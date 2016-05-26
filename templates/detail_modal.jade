@@ -1,0 +1,13 @@
+.modal-header
+  .modal-title
+    h3 {{ event.title }}
+  .modal-body
+    p.subheader {{ event.subtitle }}
+    p.locationtime {{ event.room }} - {{ event.start }} - Duration: {{ event.duration }} - Language: {{ event.language }}
+    p
+      span Speakers:
+      | &nbsp;
+      span(ng-repeat="person in event.persons") {{ person.public_name }},
+    p.abstract {{ event.abstract }}
+    p.description {{ event.description }}
+    button.btn.btn-primary(ng-click="ok()") Schließen

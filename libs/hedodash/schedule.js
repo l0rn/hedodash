@@ -9,7 +9,7 @@ $(window).scroll(function(){
     });
 });
 
-angular.module('hedodash', ['LocalStorageModule'])
+angular.module('hedodash', ['LocalStorageModule', 'ui.bootstrap'])
     .config(function (localStorageServiceProvider) {
       localStorageServiceProvider
         .setPrefix('hedo')
@@ -47,7 +47,7 @@ angular.module('hedodash', ['LocalStorageModule'])
             scope: {
                 'day': '='
             },
-            controller: function ($scope, $timeout) {
+            controller: function ($scope, $timeout, $uibModal) {
                 $scope.$watch('day', function(newVal) {
                     if (!newVal) {
                         return
@@ -56,6 +56,22 @@ angular.module('hedodash', ['LocalStorageModule'])
                     var maxHour = 6;
                     $scope.events = [];
                     $scope.hours = [];
+                    $scope.detailModal = function (ev) {
+                        var modalInstance = $uibModal.open({
+                          templateUrl: '/templates/detail_modal.html',
+                          controller: function ($scope, event) {
+                              $scope.event = event;
+                              $scope.ok = function () {
+                                  modalInstance.close();
+                              }
+                          },
+                          resolve: {
+                            event: function () {
+                              return ev;
+                            }
+                          }
+                        });
+                    };
                     _.each($scope.day.rooms, function (room) {
                         _.each(room, function (ev) {
                             if ((minHour == null || minHour > parseInt(ev.start.split(':')[0])) && parseInt(ev.start.split(':')[0]) > 6) {
@@ -177,6 +193,13 @@ angular.module('hedodash', ['LocalStorageModule'])
             });
             sock.send('init:' + token);
         };
+    })
+    .controller('ModalController',  function ($scope, event) {
+        $scope.event = event;
+        /*
+        $scope.ok = function () {
+            $uibModalInstance.close();
+        }*/
     });
 
 function collision($div1, $div2) {
