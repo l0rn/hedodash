@@ -4,6 +4,7 @@ block content
   .schedule(ng-controller="ScheduleController")
     .day-menu-wrapper
       .day-menu
+        button.btn.btn-primary.search-button(ng-click="openSearch()") Search schedule
         .day-button(ng-repeat="day in schedule.days")
           a.btn.btn-default(ng-class="{'btn-success': day.date == selectedDay.date}", ng-click="selectDay(day)") {{ day.date }}
     schedule-day(day="selectedDay")

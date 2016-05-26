@@ -15,12 +15,72 @@ angular.module('hedodash', ['LocalStorageModule', 'ui.bootstrap'])
         .setPrefix('hedo')
         .setStorageType('sessionStorage')
     })
-    .controller('ScheduleController', function($scope, $http) {
+    .controller('ScheduleController', function($scope, $http, $uibModal) {
         $http({
           method: 'GET',
           url: '/res/schedule.json'
         }).then(function (response) {
             $scope.schedule = response.data.schedule.conference;
+
+            $scope.openSearch = function (ev) {
+                var modalInstance = $uibModal.open({
+                  templateUrl: '/templates/search.html',
+                  controller: function ($scope, events) {
+                        $scope.events = events;
+                        $scope.filteredEvents = events;
+                        $scope.ok = function () {
+                            modalInstance.close();
+                        };
+                      $scope.detailModal = function (ev) {
+                            var modalInstance = $uibModal.open({
+                              templateUrl: '/templates/detail_modal.html',
+                              controller: function ($scope, event) {
+                                  $scope.event = event;
+                                  $scope.ok = function () {
+                                      modalInstance.close();
+                                  }
+                              },
+                              resolve: {
+                                event: function () {
+                                  return ev;
+                                }
+                              }
+                            });
+                        };
+                      
+                        $scope.$watch('query', function (newVal) {
+                            $scope.filteredEvents = _.filter($scope.events, function(event) {
+                                return event.title.toLowerCase().indexOf(newVal.toLowerCase()) > -1 ||
+                                    event.weekday.toLowerCase().indexOf(newVal.toLowerCase()) > -1 ||
+                                    event.room.toLowerCase().indexOf(newVal.toLowerCase()) > -1;
+                            });
+                        });
+
+                  },
+                  resolve: {
+                    events: function () {
+                        var events = [];
+                        _.each($scope.schedule.days, function (day) {
+                            _.each(day.rooms, function (room) {
+                                _.each(room, function (ev) {
+                                    var weekday = new Array(7);
+                                    weekday[0]=  "Sunday";
+                                    weekday[1] = "Monday";
+                                    weekday[2] = "Tuesday";
+                                    weekday[3] = "Wednesday";
+                                    weekday[4] = "Thursday";
+                                    weekday[5] = "Friday";
+                                    weekday[6] = "Saturday";    
+                                    ev.weekday = weekday[new Date(ev.date).getDay()];
+                                    events.push(ev);
+                                })
+                            });
+                        });
+                        return events;
+                    }
+                  }
+                });
+            };
             $scope.selectDay = function (day) {
                 $scope.selectedDay = null;
                 $scope.selectedDay = day;

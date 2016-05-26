@@ -1,0 +1,16 @@
+.modal-header
+  .modal-title
+    h3 Search events
+  .modal-body
+      input.form-control(ng-model="query", placeholder="enter search text")
+      table.table
+        tr
+          th Title
+          th Location
+          th Date
+          th Starttime
+        tr.pointer(ng-repeat="event in filteredEvents", ng-click="detailModal(event)")
+          td.title {{ event.title }}
+          td.location {{ event.room }}
+          td.date {{ event.weekday }}
+          td.start {{ event.start }}
