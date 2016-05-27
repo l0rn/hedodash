@@ -18,7 +18,7 @@ angular.module('hedodash', ['LocalStorageModule', 'ui.bootstrap'])
     .controller('ScheduleController', function($scope, $http, $uibModal) {
         $http({
           method: 'GET',
-          url: '/res/schedule.json'
+          url: globalConfig.scheduleUrl
         }).then(function (response) {
             $scope.schedule = response.data.schedule.conference;
 

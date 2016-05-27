@@ -1,3 +1,4 @@
 var globalConfig = {
-    scheduleUrl: 'https://frab.hedonist-international.org/en/WK2016/public/'
+    scheduleUrl: 'http://store.hedo/schedule/schedule.json',
+    weatherUrl: 'http://store.hedo/schedule/weather.json'
 };

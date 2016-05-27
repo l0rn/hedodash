@@ -7,7 +7,7 @@ angular.module('hedodash')
 
         $http({
             method: 'GET',
-            url: '/res/weather.json'
+            url: globalConfig.weatherUrl
         }).then(function (response) {
             var weather_json = response.data;
             $scope.weather = {};
